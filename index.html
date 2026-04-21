@@ -3,12 +3,42 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dan Hepworth personal brand site featuring a professional profile, resume, Kubrick scratch page, Seahawks stats, and a PR calculator.">
+    <meta name="description" content="Dan Hepworth professional site">
     <meta name="author" content="Dan Hepworth">
     <title>Dan Hepworth | Professional Site</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="site-theme.css">
     <style>
+        :root {
+            --bg: #071222;
+            --bg-deep: #050d17;
+            --panel: rgba(10, 24, 44, 0.9);
+            --panel-strong: rgba(13, 31, 58, 0.96);
+            --line: rgba(129, 170, 255, 0.18);
+            --text: #eef4ff;
+            --muted: #bfd0ea;
+            --accent: #8bb7ff;
+            --accent-2: #4a8cff;
+            --gold: #f4c95d;
+            --shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(circle at top, rgba(74, 140, 255, 0.22), transparent 25%),
+                linear-gradient(180deg, var(--bg), #08172a 52%, var(--bg-deep));
+        }
+
         body::before {
             content: "";
             position: fixed;
@@ -21,10 +51,34 @@
             mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent 75%);
         }
 
+        h1,
+        h2,
+        h3 {
+            margin-top: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--text);
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        .shell {
+            width: min(1180px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 1.25rem 0 3rem;
+        }
+
         .topbar {
             position: sticky;
             top: 1rem;
-            z-index: 10;
+            z-index: 20;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -41,7 +95,7 @@
         .brand {
             color: #fff;
             text-decoration: none;
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: 0.04em;
         }
@@ -49,7 +103,7 @@
         .topnav {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.9rem;
+            gap: 1rem;
         }
 
         .topnav a {
@@ -63,85 +117,103 @@
         }
 
         .hero-grid,
-        .story-grid,
+        .card-grid,
         .snapshot-grid {
             display: grid;
             gap: 1rem;
         }
 
         .hero-grid {
-            grid-template-columns: 1.4fr 0.9fr;
+            grid-template-columns: 1.35fr 0.85fr;
             align-items: stretch;
         }
 
-        .hero-art {
-            position: relative;
-            overflow: hidden;
-            min-height: 100%;
+        .panel {
             border: 1px solid var(--line);
             border-radius: 28px;
-            background:
-                linear-gradient(180deg, rgba(5, 13, 23, 0.12), rgba(5, 13, 23, 0.78)),
-                url("assets/img/kubrick-on-set.jpg") center/cover no-repeat;
+            background: linear-gradient(180deg, var(--panel-strong), var(--panel));
             box-shadow: var(--shadow);
         }
 
-        .hero-art::after {
+        .hero-copy {
+            padding: 2rem;
+        }
+
+        .eyebrow {
+            margin: 0 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .page-title {
+            font-size: clamp(3.2rem, 8vw, 6.6rem);
+            line-height: 0.93;
+            margin-bottom: 0.8rem;
+        }
+
+        .subtitle {
+            font-size: 1.08rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.6rem;
+        }
+
+        .button-link {
+            display: inline-block;
+            padding: 0.9rem 1.05rem;
+            text-decoration: none;
+            color: white;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-2), #1f4ea8);
+            font-weight: 700;
+        }
+
+        .button-link.subtle {
+            background: rgba(8, 23, 42, 0.88);
+            border: 1px solid var(--line);
+        }
+
+        .hero-visual {
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(139, 183, 255, 0.22), transparent 24%),
+                radial-gradient(circle at 78% 18%, rgba(74, 140, 255, 0.28), transparent 20%),
+                linear-gradient(180deg, rgba(12, 29, 53, 0.96), rgba(6, 16, 29, 0.96));
+        }
+
+        .hero-visual::before {
             content: "";
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(circle at 80% 15%, rgba(139, 183, 255, 0.24), transparent 26%),
-                linear-gradient(180deg, rgba(6, 16, 29, 0.08), rgba(6, 16, 29, 0.72));
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 80%);
         }
 
-        .hero-copy,
-        .hero-side {
-            position: relative;
-            z-index: 1;
+        .hero-visual::after {
+            content: "Dan Hepworth";
+            position: absolute;
+            right: 1.5rem;
+            bottom: 1.4rem;
+            color: rgba(255, 255, 255, 0.92);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: 0.04em;
         }
 
-        .hero-copy .page-title {
-            font-size: clamp(3.2rem, 8vw, 6.4rem);
-            margin-bottom: 0.6rem;
-        }
-
-        .hero-kicker {
-            max-width: 43rem;
-            margin-top: 1.5rem;
-            padding: 1rem 1.1rem;
-            border-left: 3px solid var(--gold);
-            background: rgba(8, 23, 42, 0.56);
-            color: #d6e3f6;
-            line-height: 1.7;
-        }
-
-        .hero-side {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .mini-panel {
-            padding: 1.25rem;
-            border-radius: 22px;
-            border: 1px solid var(--line);
-            background: rgba(6, 16, 29, 0.72);
-        }
-
-        .mini-panel p {
-            color: var(--muted);
-            margin-bottom: 0;
-        }
-
-        .metric-big {
-            display: block;
-            margin-bottom: 0.35rem;
-            color: var(--accent);
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-
-        .section-block {
+        .section {
             margin-top: 1rem;
         }
 
@@ -163,76 +235,67 @@
             margin-bottom: 0;
         }
 
-        .story-grid {
+        .card-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .story-card {
-            min-height: 100%;
+        .info-card,
+        .story-card,
+        .snapshot-card,
+        .interest-card {
+            padding: 1.4rem;
         }
 
-        .story-card h3 {
+        .story-card h3,
+        .snapshot-card h3 {
             font-size: 1.7rem;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-role {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.8rem;
+            font-weight: 700;
         }
 
         .snapshot-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .snapshot-card .metric {
-            margin-bottom: 0.4rem;
+        .metric {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.35rem;
         }
 
         .interest-strip {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
+            margin-bottom: 1rem;
         }
 
-        .interest-strip .tag {
-            min-width: 120px;
-        }
-
-        .sports-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        .sports-card {
-            padding: 1.2rem;
-            border-radius: 20px;
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1rem;
+            border-radius: 999px;
             border: 1px solid var(--line);
             background: rgba(6, 16, 29, 0.72);
-            text-align: center;
-        }
-
-        .sports-number {
-            display: block;
-            font-size: 2rem;
+            color: var(--text);
             font-weight: 700;
-            color: var(--accent);
-        }
-
-        .sports-label {
-            display: block;
-            margin-top: 0.45rem;
-            color: var(--muted);
-        }
-
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1.25rem;
+            min-width: 120px;
         }
 
         @media (max-width: 950px) {
             .hero-grid,
-            .story-grid,
-            .snapshot-grid,
-            .sports-grid {
+            .card-grid,
+            .snapshot-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -252,27 +315,23 @@
                 <a href="#about">About</a>
                 <a href="#experience">Experience</a>
                 <a href="#passions">Passions</a>
-                <a href="#seattle">Seattle Snapshot</a>
                 <a href="resume.html">Resume</a>
                 <a href="myweb.html">Kubrick Page</a>
+                <a href="seattle.html">Seattle Snapshot</a>
                 <a href="app.html">PR Calculator</a>
             </nav>
         </header>
 
         <main id="top">
             <section class="hero-grid" id="about">
-                <div class="hero-panel hero-copy">
+                <div class="panel hero-copy">
                     <p class="eyebrow">Professional Personal Brand</p>
                     <h1 class="page-title">Dan Hepworth</h1>
                     <p class="subtitle">BYU Communications, Class of 2028</p>
-                    <p class="subtitle">
-                        I’m building toward a career shaped by discipline, communication, and long-term freedom. The goal is
+                    <p>
+                        I'm building toward a career shaped by discipline, communication, and long-term freedom. The goal is
                         to create real value, stay adaptable, and build a future with both stability and ownership.
                     </p>
-                    <div class="hero-kicker">
-                        This page now uses the same dark blue, cinematic visual system as the Kubrick and resume pages so the
-                        whole project feels like one brand instead of separate assignments stitched together.
-                    </div>
                     <div class="action-row">
                         <a class="button-link" href="resume.html">View Resume</a>
                         <a class="button-link subtle" href="myweb.html">Kubrick Scratch Page</a>
@@ -280,69 +339,63 @@
                     </div>
                 </div>
 
-                <div class="hero-side">
-                    <div class="hero-art" aria-hidden="true"></div>
-                    <div class="mini-panel">
-                        <span class="metric-big">2028</span>
-                        <p>Target BYU graduation in communications, with a focus on building a strong foundation for business, media, and entrepreneurship.</p>
-                    </div>
-                </div>
+                <div class="panel hero-visual" aria-hidden="true"></div>
             </section>
 
-            <section class="section-block" id="experience">
+            <section class="section" id="experience">
                 <div class="section-heading">
                     <p>Experience</p>
-                    <h2>What I’ve Built So Far</h2>
+                    <h2>What I've Built So Far</h2>
                 </div>
-                <div class="story-grid">
-                    <article class="content-panel story-card">
+                <div class="card-grid">
+                    <article class="panel story-card">
                         <h3>Brooks Pest Solutions</h3>
-                        <p>Sales Representative</p>
+                        <p class="story-role">Sales Representative</p>
                         <p>Built confidence in face-to-face communication, learned how to handle rejection, and developed the ability to create trust quickly in competitive conversations.</p>
                     </article>
-                    <article class="content-panel story-card">
+                    <article class="panel story-card">
                         <h3>Restaurant Service</h3>
-                        <p>Waiter</p>
+                        <p class="story-role">Waiter</p>
                         <p>Worked in fast-paced environments where timing, composure, and attention to detail mattered every shift and every customer interaction.</p>
                     </article>
-                    <article class="content-panel story-card">
+                    <article class="panel story-card">
                         <h3>Construction</h3>
-                        <p>Construction Laborer</p>
+                        <p class="story-role">Construction Laborer</p>
                         <p>Developed reliability, physical discipline, and respect for hard work while learning how to contribute consistently on a crew.</p>
                     </article>
                 </div>
             </section>
 
-            <section class="section-block">
+            <section class="section">
                 <div class="section-heading">
                     <p>Direction</p>
                     <h2>What Ties It Together</h2>
                 </div>
                 <div class="snapshot-grid">
-                    <div class="content-panel snapshot-card">
-                        <span class="metric">School</span>
-                        <h3>BYU</h3>
+                    <div class="panel snapshot-card">
+                        <span class="metric">BYU</span>
+                        <h3>School</h3>
                         <p>Communications major working toward graduation in 2028.</p>
                     </div>
-                    <div class="content-panel snapshot-card">
-                        <span class="metric">Background</span>
-                        <h3>Lone Peak</h3>
+                    <div class="panel snapshot-card">
+                        <span class="metric">Lone Peak</span>
+                        <h3>Background</h3>
                         <p>Graduated in 2024 and moved straight into building experience that sharpens communication and work ethic.</p>
                     </div>
-                    <div class="content-panel snapshot-card">
-                        <span class="metric">Goal</span>
-                        <h3>Stability + Freedom</h3>
+                    <div class="panel snapshot-card">
+                        <span class="metric">Freedom</span>
+                        <h3>Goal</h3>
                         <p>Long-term focus on communication, entrepreneurship, and creating a life with more ownership and independence.</p>
                     </div>
                 </div>
             </section>
 
-            <section class="section-block" id="passions">
+            <section class="section" id="passions">
                 <div class="section-heading">
                     <p>Passions</p>
                     <h2>Performance, Taste, and Drive</h2>
                 </div>
-                <div class="content-panel">
+                <div class="panel interest-card">
                     <div class="interest-strip">
                         <span class="tag">Lifting</span>
                         <span class="tag">MMA</span>
@@ -351,55 +404,11 @@
                         <span class="tag">Guitar</span>
                         <span class="tag">Entrepreneurship</span>
                     </div>
-                    <p style="margin-top: 1.25rem;">
+                    <p>
                         My interests all connect back to discipline and identity. Training builds consistency, music and film
                         sharpen taste, and entrepreneurship keeps me thinking about leverage, ownership, and the freedom that
                         comes from creating something valuable.
                     </p>
-                </div>
-            </section>
-
-            <section class="section-block" id="seattle">
-                <div class="section-heading">
-                    <p>Seattle Snapshot</p>
-                    <h2>Sports Theme, But Actually Relevant</h2>
-                </div>
-                <div class="content-panel">
-                    <p>
-                        The old graph didn’t fit the rest of the site at all. This section keeps the dark blue sports look,
-                        stays on theme with the Seahawks references elsewhere in the project, and feels much more intentional.
-                    </p>
-                    <div class="sports-grid">
-                        <div class="sports-card">
-                            <span class="sports-number">10-7</span>
-                            <span class="sports-label">2024 record</span>
-                        </div>
-                        <div class="sports-card">
-                            <span class="sports-number">375</span>
-                            <span class="sports-label">points scored</span>
-                        </div>
-                        <div class="sports-card">
-                            <span class="sports-number">368</span>
-                            <span class="sports-label">points allowed</span>
-                        </div>
-                        <div class="sports-card">
-                            <span class="sports-number">4,320</span>
-                            <span class="sports-label">Geno Smith pass yards</span>
-                        </div>
-                        <div class="sports-card">
-                            <span class="sports-number">573</span>
-                            <span class="sports-label">Kenneth Walker III rush yards</span>
-                        </div>
-                        <div class="sports-card">
-                            <span class="sports-number">1,130</span>
-                            <span class="sports-label">JSN receiving yards</span>
-                        </div>
-                    </div>
-                    <div class="footer-links">
-                        <a class="button-link" href="resume.html">Resume Page</a>
-                        <a class="button-link subtle" href="myweb.html">Kubrick Scratch Page</a>
-                        <a class="button-link subtle" href="app.html">PR Calculator</a>
-                    </div>
                 </div>
             </section>
         </main>
