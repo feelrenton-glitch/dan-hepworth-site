@@ -2,177 +2,373 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Dan Hepworth personal brand site featuring a professional profile, resume, Kubrick scratch page, Seahawks stats, and a PR calculator.">
     <meta name="author" content="Dan Hepworth">
-    <title>Dan Hepworth | Personal Brand</title>
+    <title>Dan Hepworth | Professional Site</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css">
-    <link href="css/styles.css" rel="stylesheet">
-</head>
-<body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
-            <span class="site-name">Dan Hepworth</span>
-        </a>
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#passions">Passions</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#tableau">Seattle Snapshot</a></li>
-                <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
-                <li class="nav-item"><a class="nav-link" href="myweb.html">Kubrick Page</a></li>
-                <li class="nav-item"><a class="nav-link" href="app.html">PR Calculator</a></li>
-            </ul>
-        </div>
-    </nav>
+    <link rel="stylesheet" href="site-theme.css">
+    <style>
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent 75%);
+        }
 
-    <div class="container-fluid p-0">
-        <section class="resume-section hero-section" id="about">
-            <div class="resume-section-content">
-                <p class="eyebrow mb-3">Professional Personal Brand</p>
-                <h1 class="mb-0">
-                    Dan
-                    <span class="text-primary">Hepworth</span>
-                </h1>
-                <div class="subheading mb-4">
-                    BYU Communications, Class of 2028
+        .topbar {
+            position: sticky;
+            top: 1rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(8, 23, 42, 0.78);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow);
+        }
+
+        .brand {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .topnav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+        }
+
+        .topnav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .topnav a:hover {
+            color: var(--text);
+        }
+
+        .hero-grid,
+        .story-grid,
+        .snapshot-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .hero-grid {
+            grid-template-columns: 1.4fr 0.9fr;
+            align-items: stretch;
+        }
+
+        .hero-art {
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background:
+                linear-gradient(180deg, rgba(5, 13, 23, 0.12), rgba(5, 13, 23, 0.78)),
+                url("assets/img/kubrick-on-set.jpg") center/cover no-repeat;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-art::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 80% 15%, rgba(139, 183, 255, 0.24), transparent 26%),
+                linear-gradient(180deg, rgba(6, 16, 29, 0.08), rgba(6, 16, 29, 0.72));
+        }
+
+        .hero-copy,
+        .hero-side {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-copy .page-title {
+            font-size: clamp(3.2rem, 8vw, 6.4rem);
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-kicker {
+            max-width: 43rem;
+            margin-top: 1.5rem;
+            padding: 1rem 1.1rem;
+            border-left: 3px solid var(--gold);
+            background: rgba(8, 23, 42, 0.56);
+            color: #d6e3f6;
+            line-height: 1.7;
+        }
+
+        .hero-side {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .mini-panel {
+            padding: 1.25rem;
+            border-radius: 22px;
+            border: 1px solid var(--line);
+            background: rgba(6, 16, 29, 0.72);
+        }
+
+        .mini-panel p {
+            color: var(--muted);
+            margin-bottom: 0;
+        }
+
+        .metric-big {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .section-block {
+            margin-top: 1rem;
+        }
+
+        .section-heading {
+            margin-bottom: 1rem;
+        }
+
+        .section-heading p {
+            margin-bottom: 0.45rem;
+            color: var(--gold);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2.1rem, 4vw, 3.5rem);
+            margin-bottom: 0;
+        }
+
+        .story-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .story-card {
+            min-height: 100%;
+        }
+
+        .story-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .snapshot-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .snapshot-card .metric {
+            margin-bottom: 0.4rem;
+        }
+
+        .interest-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .interest-strip .tag {
+            min-width: 120px;
+        }
+
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .sports-card {
+            padding: 1.2rem;
+            border-radius: 20px;
+            border: 1px solid var(--line);
+            background: rgba(6, 16, 29, 0.72);
+            text-align: center;
+        }
+
+        .sports-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .sports-label {
+            display: block;
+            margin-top: 0.45rem;
+            color: var(--muted);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.25rem;
+        }
+
+        @media (max-width: 950px) {
+            .hero-grid,
+            .story-grid,
+            .snapshot-grid,
+            .sports-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                border-radius: 28px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <header class="topbar">
+            <a class="brand" href="#top">Dan Hepworth</a>
+            <nav class="topnav" aria-label="Primary">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#passions">Passions</a>
+                <a href="#seattle">Seattle Snapshot</a>
+                <a href="resume.html">Resume</a>
+                <a href="myweb.html">Kubrick Page</a>
+                <a href="app.html">PR Calculator</a>
+            </nav>
+        </header>
+
+        <main id="top">
+            <section class="hero-grid" id="about">
+                <div class="hero-panel hero-copy">
+                    <p class="eyebrow">Professional Personal Brand</p>
+                    <h1 class="page-title">Dan Hepworth</h1>
+                    <p class="subtitle">BYU Communications, Class of 2028</p>
+                    <p class="subtitle">
+                        I’m building toward a career shaped by discipline, communication, and long-term freedom. The goal is
+                        to create real value, stay adaptable, and build a future with both stability and ownership.
+                    </p>
+                    <div class="hero-kicker">
+                        This page now uses the same dark blue, cinematic visual system as the Kubrick and resume pages so the
+                        whole project feels like one brand instead of separate assignments stitched together.
+                    </div>
+                    <div class="action-row">
+                        <a class="button-link" href="resume.html">View Resume</a>
+                        <a class="button-link subtle" href="myweb.html">Kubrick Scratch Page</a>
+                        <a class="button-link subtle" href="app.html">PR Calculator</a>
+                    </div>
                 </div>
-                <p class="lead mb-4">
-                    I am building a career around clear communication, discipline, and initiative. I care about creating
-                    real value, staying adaptable, and building a future that offers both stability and freedom.
-                </p>
-                <div class="hero-kicker">
-                    Built around the same dark, cinematic blue theme as the rest of the site, with a clearer personal brand and stronger visual hierarchy.
+
+                <div class="hero-side">
+                    <div class="hero-art" aria-hidden="true"></div>
+                    <div class="mini-panel">
+                        <span class="metric-big">2028</span>
+                        <p>Target BYU graduation in communications, with a focus on building a strong foundation for business, media, and entrepreneurship.</p>
+                    </div>
                 </div>
-                <div class="stat-grid">
-                    <div class="snapshot-card">
-                        <p class="snapshot-label">School</p>
-                        <h3>Brigham Young University</h3>
+            </section>
+
+            <section class="section-block" id="experience">
+                <div class="section-heading">
+                    <p>Experience</p>
+                    <h2>What I’ve Built So Far</h2>
+                </div>
+                <div class="story-grid">
+                    <article class="content-panel story-card">
+                        <h3>Brooks Pest Solutions</h3>
+                        <p>Sales Representative</p>
+                        <p>Built confidence in face-to-face communication, learned how to handle rejection, and developed the ability to create trust quickly in competitive conversations.</p>
+                    </article>
+                    <article class="content-panel story-card">
+                        <h3>Restaurant Service</h3>
+                        <p>Waiter</p>
+                        <p>Worked in fast-paced environments where timing, composure, and attention to detail mattered every shift and every customer interaction.</p>
+                    </article>
+                    <article class="content-panel story-card">
+                        <h3>Construction</h3>
+                        <p>Construction Laborer</p>
+                        <p>Developed reliability, physical discipline, and respect for hard work while learning how to contribute consistently on a crew.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section-block">
+                <div class="section-heading">
+                    <p>Direction</p>
+                    <h2>What Ties It Together</h2>
+                </div>
+                <div class="snapshot-grid">
+                    <div class="content-panel snapshot-card">
+                        <span class="metric">School</span>
+                        <h3>BYU</h3>
                         <p>Communications major working toward graduation in 2028.</p>
                     </div>
-                    <div class="snapshot-card">
-                        <p class="snapshot-label">Background</p>
-                        <h3>Lone Peak High School</h3>
-                        <p>Graduated in 2024 with momentum toward business, media, and leadership work.</p>
+                    <div class="content-panel snapshot-card">
+                        <span class="metric">Background</span>
+                        <h3>Lone Peak</h3>
+                        <p>Graduated in 2024 and moved straight into building experience that sharpens communication and work ethic.</p>
                     </div>
-                    <div class="snapshot-card">
-                        <p class="snapshot-label">Career Goal</p>
+                    <div class="content-panel snapshot-card">
+                        <span class="metric">Goal</span>
                         <h3>Stability + Freedom</h3>
-                        <p>Long-term focus on entrepreneurship, communication, and opportunity creation.</p>
+                        <p>Long-term focus on communication, entrepreneurship, and creating a life with more ownership and independence.</p>
                     </div>
                 </div>
-                <div class="social-icons mt-5">
-                    <a class="social-icon" href="resume.html" aria-label="View resume">
-                        <i class="fas fa-file-lines"></i>
-                    </a>
-                    <a class="social-icon" href="myweb.html" aria-label="View Kubrick scratch page">
-                        <i class="fas fa-film"></i>
-                    </a>
-                    <a class="social-icon" href="app.html" aria-label="Open PR calculator">
-                        <i class="fas fa-dumbbell"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <hr class="m-0">
-
-        <section class="resume-section" id="experience">
-            <div class="resume-section-content">
-                <h2 class="mb-5">Experience &amp; Resume Snapshot</h2>
-                <div class="experience-card">
-                    <div>
-                        <h3 class="mb-0">Brooks Pest Solutions</h3>
-                        <div class="subheading mb-3">Sales Representative</div>
-                        <p>
-                            Built confidence in face-to-face communication, handled rejection with consistency, and learned
-                            how to earn trust quickly in competitive conversations.
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0"><span class="text-primary">Recent Experience</span></div>
+            <section class="section-block" id="passions">
+                <div class="section-heading">
+                    <p>Passions</p>
+                    <h2>Performance, Taste, and Drive</h2>
                 </div>
-                <div class="experience-card">
-                    <div>
-                        <h3 class="mb-0">Restaurant Service</h3>
-                        <div class="subheading mb-3">Waiter</div>
-                        <p>
-                            Worked in fast-paced environments where attention to detail, timing, and customer experience
-                            mattered on every shift.
-                        </p>
+                <div class="content-panel">
+                    <div class="interest-strip">
+                        <span class="tag">Lifting</span>
+                        <span class="tag">MMA</span>
+                        <span class="tag">Music</span>
+                        <span class="tag">Movies</span>
+                        <span class="tag">Guitar</span>
+                        <span class="tag">Entrepreneurship</span>
                     </div>
-                    <div class="flex-shrink-0"><span class="text-primary">Hospitality</span></div>
-                </div>
-                <div class="experience-card">
-                    <div>
-                        <h3 class="mb-0">Construction</h3>
-                        <div class="subheading mb-3">Construction Laborer</div>
-                        <p>
-                            Developed toughness, consistency, and respect for physical work while learning how to contribute
-                            reliably as part of a crew.
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0"><span class="text-primary">Hands-On Work</span></div>
-                </div>
-                <div class="career-callout">
-                    <h3 class="mb-2">What ties it together</h3>
-                    <p class="mb-0">
-                        Sales taught persuasion, service taught people skills, and labor taught grit. Together they shape the
-                        kind of communicator and entrepreneur I want to become.
+                    <p style="margin-top: 1.25rem;">
+                        My interests all connect back to discipline and identity. Training builds consistency, music and film
+                        sharpen taste, and entrepreneurship keeps me thinking about leverage, ownership, and the freedom that
+                        comes from creating something valuable.
                     </p>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <hr class="m-0">
-
-        <section class="resume-section" id="passions">
-            <div class="resume-section-content">
-                <h2 class="mb-5">Passions &amp; Interests</h2>
-                <div class="pill-grid">
-                    <span class="interest-pill">Lifting</span>
-                    <span class="interest-pill">MMA</span>
-                    <span class="interest-pill">Music</span>
-                    <span class="interest-pill">Movies</span>
-                    <span class="interest-pill">Guitar</span>
-                    <span class="interest-pill">Entrepreneurship</span>
+            <section class="section-block" id="seattle">
+                <div class="section-heading">
+                    <p>Seattle Snapshot</p>
+                    <h2>Sports Theme, But Actually Relevant</h2>
                 </div>
-                <p class="mt-4">
-                    My interests all connect back to performance and discipline. Training builds consistency, music and film
-                    sharpen taste, and entrepreneurship keeps me thinking about leverage, ownership, and creating freedom.
-                </p>
-                <div class="feature-strip">
-                    <div class="feature-chip">Dark blue sports identity</div>
-                    <div class="feature-chip">Film-inspired taste</div>
-                    <div class="feature-chip">Entrepreneurial direction</div>
-                </div>
-            </div>
-        </section>
-
-        <hr class="m-0">
-
-        <section class="resume-section" id="tableau">
-            <div class="resume-section-content">
-                <h2 class="mb-5">Seattle Snapshot</h2>
-                <p class="mb-4">
-                    The old graph felt random and disconnected from the rest of the site. This section fits the dark sports look
-                    better and ties back to the Seahawks stats theme used elsewhere in the project.
-                </p>
-                <div class="sports-panel">
+                <div class="content-panel">
+                    <p>
+                        The old graph didn’t fit the rest of the site at all. This section keeps the dark blue sports look,
+                        stays on theme with the Seahawks references elsewhere in the project, and feels much more intentional.
+                    </p>
                     <div class="sports-grid">
                         <div class="sports-card">
                             <span class="sports-number">10-7</span>
@@ -199,15 +395,14 @@
                             <span class="sports-label">JSN receiving yards</span>
                         </div>
                     </div>
-                    <p class="sports-note mb-0">
-                        More film and sports-themed content continues on the <a href="myweb.html">Kubrick page</a>, which keeps the
-                        same dark visual direction while covering a completely different topic.
-                    </p>
+                    <div class="footer-links">
+                        <a class="button-link" href="resume.html">Resume Page</a>
+                        <a class="button-link subtle" href="myweb.html">Kubrick Scratch Page</a>
+                        <a class="button-link subtle" href="app.html">PR Calculator</a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripts.js"></script>
 </body>
 </html>
