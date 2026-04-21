@@ -10978,6 +10978,18 @@ body {
     linear-gradient(180deg, #071221, #081728 45%, #0b1b30 100%);
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent 75%);
+}
+
 a {
   color: #88b7ff;
 }
@@ -11017,6 +11029,21 @@ a:hover {
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.3);
 }
 
+.site-name {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 23, 42, 0.48);
+  color: #fff;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+}
+
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -11026,6 +11053,8 @@ a:hover {
 
 .hero-section .lead {
   max-width: 48rem;
+  font-size: 1.18rem;
+  line-height: 1.8;
 }
 
 .stat-grid,
@@ -11043,17 +11072,19 @@ a:hover {
 .experience-card,
 .career-callout {
   border: 1px solid rgba(136, 183, 255, 0.14);
-  border-radius: 1.25rem;
+  border-radius: 1.45rem;
   background: linear-gradient(180deg, rgba(17, 35, 59, 0.95), rgba(9, 21, 37, 0.96));
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
 }
 
 .snapshot-card {
   padding: 1.25rem;
+  min-height: 100%;
 }
 
 .snapshot-card h3 {
   color: #f2f6ff;
+  font-size: 2rem;
 }
 
 .snapshot-label {
@@ -11077,6 +11108,15 @@ a:hover {
   margin-top: 1.5rem;
 }
 
+.hero-kicker {
+  max-width: 40rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid #f3c86a;
+  background: rgba(8, 23, 42, 0.56);
+  color: #d6e3f6;
+}
+
 .pill-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -11091,6 +11131,63 @@ a:hover {
   color: #eef4ff;
   background: rgba(10, 23, 39, 0.75);
   font-weight: 700;
+}
+
+.feature-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.feature-chip {
+  display: inline-flex;
+  padding: 0.8rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(136, 183, 255, 0.14);
+  background: rgba(10, 23, 39, 0.75);
+  color: #eef4ff;
+  font-weight: 700;
+}
+
+.sports-panel {
+  border: 1px solid rgba(136, 183, 255, 0.14);
+  border-radius: 1.45rem;
+  background: linear-gradient(180deg, rgba(17, 35, 59, 0.95), rgba(9, 21, 37, 0.96));
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+  padding: 1.4rem;
+}
+
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.sports-card {
+  padding: 1.2rem;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(136, 183, 255, 0.14);
+  background: rgba(10, 23, 39, 0.75);
+  text-align: center;
+}
+
+.sports-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #88b7ff;
+}
+
+.sports-label {
+  display: block;
+  margin-top: 0.45rem;
+  color: #d3dff1;
+}
+
+.sports-note {
+  margin-top: 1rem;
+  color: #bfd0ea;
 }
 
 .social-icons .social-icon {
@@ -11110,13 +11207,31 @@ section.resume-section h3 {
   color: #eef4ff;
 }
 
+section.resume-section h2 {
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+}
+
+section.resume-section h1 {
+  font-size: clamp(4rem, 10vw, 7.2rem);
+  color: #f7fbff;
+}
+
 @media (max-width: 992px) {
   .stat-grid,
-  .pill-grid {
+  .pill-grid,
+  .sports-grid {
     grid-template-columns: 1fr;
   }
 
   .experience-card {
     flex-direction: column;
+  }
+
+  .site-name {
+    font-size: 1.15rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
   }
 }
