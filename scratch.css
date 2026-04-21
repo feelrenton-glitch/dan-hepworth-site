@@ -35,7 +35,7 @@ body {
     padding: 2rem;
     background:
         linear-gradient(rgba(4, 11, 20, 0.38), rgba(4, 11, 20, 0.88)),
-        url("assets/img/kubrick-on-set.jpg") center/cover no-repeat;
+        url("kubrick-on-set.jpg") center/cover no-repeat;
 }
 
 .hero-overlay {
