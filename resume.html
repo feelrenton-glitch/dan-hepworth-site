@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dan Hepworth | Resume</title>
+    <style>
+        :root {
+            --bg: #07111f;
+            --panel: #0f1e33;
+            --panel-2: #132846;
+            --line: rgba(141, 180, 255, 0.18);
+            --text: #f3f7ff;
+            --muted: #b5c4dc;
+            --accent: #67a5ff;
+            --accent-2: #7dd3fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background:
+                radial-gradient(circle at top, rgba(103, 165, 255, 0.18), transparent 30%),
+                linear-gradient(180deg, #06101d, #0a1628 55%, #0e1d32);
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 32px;
+            background: rgba(15, 30, 51, 0.92);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .monogram {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 18px 40px rgba(103, 165, 255, 0.32);
+        }
+
+        h1,
+        h2 {
+            margin: 0 0 12px;
+        }
+
+        .subtitle,
+        .contact-info {
+            color: var(--muted);
+        }
+
+        .nav-buttons,
+        .top-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .nav-buttons a,
+        .top-links a,
+        .back-link {
+            display: inline-block;
+            margin: 6px;
+            padding: 10px 16px;
+            color: white;
+            text-decoration: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #1f4fa0, #2f6ed7);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .nav-buttons a:hover,
+        .top-links a:hover,
+        .back-link:hover {
+            transform: translateY(-2px);
+            opacity: 0.92;
+        }
+
+        .section {
+            margin-top: 24px;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(19, 40, 70, 0.96), rgba(12, 26, 46, 0.96));
+        }
+
+        .job-title {
+            font-weight: bold;
+            color: var(--accent-2);
+        }
+
+        .date {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .back-link {
+            position: fixed;
+            right: 28px;
+            bottom: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="monogram">DH</div>
+            <h1>Dan Hepworth</h1>
+            <p class="subtitle">Communications Student | BYU Class of 2028</p>
+            <div class="contact-info">
+                <p>Focused on communication, growth, entrepreneurship, and building a career with stability and freedom.</p>
+            </div>
+            <div class="top-links">
+                <a href="index.html">Professional Site</a>
+                <a href="myweb.html">Kubrick Scratch Page</a>
+                <a href="app.html">PR Calculator</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="#education">Education</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#interests">Interests</a>
+            </div>
+        </div>
+
+        <div class="section" id="education">
+            <h2>Education</h2>
+            <ul>
+                <li><span class="job-title">Brigham Young University</span> - Communications major, expected graduation 2028</li>
+                <li><span class="job-title">Lone Peak High School</span> - Graduated 2024</li>
+            </ul>
+        </div>
+
+        <div class="section" id="experience">
+            <h2>Experience</h2>
+            <ul>
+                <li>
+                    <span class="job-title">Brooks Pest Solutions</span>
+                    <br>Sales Representative <span class="date">Recent</span>
+                    <ul>
+                        <li>Built confidence in face-to-face communication and customer persuasion.</li>
+                        <li>Handled rejection and kept performance consistent in a results-driven environment.</li>
+                        <li>Learned how to create trust quickly and communicate value clearly.</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="job-title">Restaurant Work</span>
+                    <br>Waiter <span class="date">Recent</span>
+                    <ul>
+                        <li>Delivered strong customer service in fast-paced settings.</li>
+                        <li>Managed timing, composure, and attention to detail under pressure.</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="job-title">Construction</span>
+                    <br>Construction Laborer <span class="date">Recent</span>
+                    <ul>
+                        <li>Developed discipline, reliability, and toughness through physical team-based work.</li>
+                        <li>Contributed consistently in environments where effort and accountability mattered daily.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section" id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>Communication and relationship-building</li>
+                <li>Sales mindset and persuasion</li>
+                <li>Customer service and adaptability</li>
+                <li>Work ethic, consistency, and physical discipline</li>
+                <li>Entrepreneurial thinking</li>
+            </ul>
+        </div>
+
+        <div class="section" id="interests">
+            <h2>Interests</h2>
+            <ul>
+                <li>Lifting and personal performance</li>
+                <li>MMA and competitive discipline</li>
+                <li>Music and guitar</li>
+                <li>Movies, especially strong visual storytelling</li>
+                <li>Entrepreneurship and building freedom over time</li>
+            </ul>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-link">Back to Home</a>
+</body>
+</html>

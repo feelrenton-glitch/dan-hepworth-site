@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dan Hepworth | PR Calculator</title>
+    <style>
+        :root {
+            --bg: #06101d;
+            --panel: #0d1c30;
+            --panel-2: #142844;
+            --line: rgba(115, 172, 255, 0.2);
+            --text: #eff5ff;
+            --muted: #a4b7d6;
+            --accent: #4a90ff;
+            --accent-2: #7cc4ff;
+            --success: #34d399;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top, rgba(74, 144, 255, 0.18), transparent 28%),
+                linear-gradient(180deg, #06101d, #0c1930 48%, #091423);
+        }
+
+        .app-shell {
+            width: min(1100px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 2rem 0 3rem;
+        }
+
+        .hero {
+            margin-bottom: 1.25rem;
+            padding: 1.8rem;
+            border-radius: 28px;
+            border: 1px solid var(--line);
+            background: linear-gradient(135deg, rgba(20, 40, 68, 0.96), rgba(13, 28, 48, 0.96));
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 60ch;
+        }
+
+        .hero-links a {
+            display: inline-block;
+            margin-right: 0.75rem;
+            margin-top: 0.5rem;
+            padding: 0.8rem 1rem;
+            text-decoration: none;
+            color: white;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), #2c63c7);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .panel {
+            padding: 1.4rem;
+            border-radius: 24px;
+            border: 1px solid var(--line);
+            background: rgba(13, 28, 48, 0.95);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            font-size: 1rem;
+        }
+
+        input,
+        select {
+            margin-bottom: 1rem;
+            background: #091423;
+            color: var(--text);
+        }
+
+        button {
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), #285cb9);
+            font-weight: bold;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .result-card {
+            padding: 1rem;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(20, 40, 68, 0.96), rgba(9, 20, 35, 0.96));
+            border: 1px solid var(--line);
+        }
+
+        .result-card strong,
+        .lift-number {
+            display: block;
+        }
+
+        .lift-number {
+            margin-top: 0.45rem;
+            font-size: 1.8rem;
+            color: var(--accent-2);
+        }
+
+        .zones {
+            margin-top: 1rem;
+            padding-left: 20px;
+            color: var(--muted);
+        }
+
+        .insight {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 16px;
+            background: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.18);
+            color: #d3fff0;
+        }
+
+        @media (max-width: 820px) {
+            .grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <section class="hero">
+            <h1>PR Calculator</h1>
+            <p>
+                This single-page web app estimates one-rep max using multiple lifting formulas and gives simple training
+                zones based on the average result. It fits the project requirement for a small web app made with AI help.
+            </p>
+            <div class="hero-links">
+                <a href="index.html">Professional Site</a>
+                <a href="resume.html">Resume</a>
+                <a href="myweb.html">Kubrick Scratch Page</a>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="panel">
+                <label for="lift">Lift</label>
+                <select id="lift">
+                    <option value="Bench Press">Bench Press</option>
+                    <option value="Squat">Squat</option>
+                    <option value="Deadlift">Deadlift</option>
+                    <option value="Overhead Press">Overhead Press</option>
+                </select>
+
+                <label for="weight">Weight</label>
+                <input id="weight" type="number" min="1" value="225">
+
+                <label for="reps">Reps Completed</label>
+                <input id="reps" type="number" min="1" max="15" value="5">
+
+                <label for="unit">Unit</label>
+                <select id="unit">
+                    <option value="lb">Pounds (lb)</option>
+                    <option value="kg">Kilograms (kg)</option>
+                </select>
+
+                <button id="calculate">Calculate PR</button>
+                <div class="insight" id="insight">
+                    Enter a set you have actually completed and the calculator will estimate your one-rep max.
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2 id="result-title">Estimated Numbers</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <strong>Epley</strong>
+                        <span class="lift-number" id="epley">0</span>
+                    </div>
+                    <div class="result-card">
+                        <strong>Brzycki</strong>
+                        <span class="lift-number" id="brzycki">0</span>
+                    </div>
+                    <div class="result-card">
+                        <strong>Lombardi</strong>
+                        <span class="lift-number" id="lombardi">0</span>
+                    </div>
+                    <div class="result-card">
+                        <strong>Average 1RM</strong>
+                        <span class="lift-number" id="average">0</span>
+                    </div>
+                </div>
+
+                <h3>Suggested Training Zones</h3>
+                <ul class="zones" id="zones"></ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const liftInput = document.getElementById("lift");
+        const weightInput = document.getElementById("weight");
+        const repsInput = document.getElementById("reps");
+        const unitInput = document.getElementById("unit");
+        const insight = document.getElementById("insight");
+        const zonesList = document.getElementById("zones");
+
+        function round(value) {
+            return Math.round(value);
+        }
+
+        function format(value, unit) {
+            return `${round(value)} ${unit}`;
+        }
+
+        function renderZones(max, unit) {
+            const zones = [
+                `Recovery / speed work: ${format(max * 0.6, unit)} at 60%`,
+                `Volume work: ${format(max * 0.7, unit)} at 70%`,
+                `Strength work: ${format(max * 0.8, unit)} at 80%`,
+                `Heavy doubles or singles: ${format(max * 0.9, unit)} at 90%`,
+            ];
+
+            zonesList.innerHTML = zones.map((zone) => `<li>${zone}</li>`).join("");
+        }
+
+        function calculate() {
+            const lift = liftInput.value;
+            const weight = Number(weightInput.value);
+            const reps = Number(repsInput.value);
+            const unit = unitInput.value;
+
+            if (!weight || !reps || reps < 1) {
+                insight.textContent = "Enter valid numbers for weight and reps.";
+                return;
+            }
+
+            const epley = weight * (1 + reps / 30);
+            const brzycki = weight * (36 / (37 - reps));
+            const lombardi = weight * Math.pow(reps, 0.1);
+            const average = (epley + brzycki + lombardi) / 3;
+
+            document.getElementById("result-title").textContent = `${lift} Estimates`;
+            document.getElementById("epley").textContent = format(epley, unit);
+            document.getElementById("brzycki").textContent = format(brzycki, unit);
+            document.getElementById("lombardi").textContent = format(lombardi, unit);
+            document.getElementById("average").textContent = format(average, unit);
+
+            renderZones(average, unit);
+            insight.textContent = `Based on ${weight} ${unit} for ${reps} reps, your estimated ${lift.toLowerCase()} 1RM is around ${format(average, unit)}.`;
+        }
+
+        document.getElementById("calculate").addEventListener("click", calculate);
+        calculate();
+    </script>
+</body>
+</html>
